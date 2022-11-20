@@ -6,9 +6,31 @@
  * @returns {boolean} isCooked
  */
 const foodIsCooked = function(kind, internalTemp, doneness) {
-  // Write function HERE
+  let flag = false;
+  switch (kind) {
+    case 'chicken':
+        flag = (internalTemp >= 165)? true: false;
+      break;
+    case 'beef':
+      switch (doneness) {
+        case 'rare':
+          flag = (internalTemp >= 125)? true: false;
+          break;
+        case 'medium':
+          flag = (internalTemp >= 138)? true: false;
+          break;
+        case 'well':
+          flag = (internalTemp >= 155)? true: false;
+          break;
+        default:
+          break;  
+      }  
+      default:
+        break;
+    }
+    return flag;
+ }
 
-}
 
 
 

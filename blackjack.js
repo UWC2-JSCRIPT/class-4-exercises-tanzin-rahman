@@ -164,19 +164,26 @@ const startGame = function() {
   dealer.drawCard();
 
 
+  let dealerScore = calcPoints(dealer.hand).total;
   let playerScore = calcPoints(player.hand).total;
+
+  if (playerScore === 21 )
+      return `Player wins as scored 21!`; 
+  if (dealerScore === 21)
+      return `Dealer wins as scored 21!`;  
+
   showHand(player);
+   
   while (playerScore < 21 && confirm(getMessage(playerScore, dealer.hand[0]))) {
     player.drawCard();
     playerScore = calcPoints(player.hand).total;
     showHand(player);
   }
   if (playerScore > 21) {
-    return 'You went over 21 - you lose!';
+    return `You went over 21 - you lose!`;
   }
   console.log(`Player stands at ${playerScore}`);
 
-  let dealerScore = calcPoints(dealer.hand).total;
   while (dealerScore < 21 && dealerShouldDraw(dealer.hand)) {
     dealer.drawCard();
     dealerScore = calcPoints(dealer.hand).total;
@@ -189,5 +196,5 @@ const startGame = function() {
 
   return determineWinner(playerScore, dealerScore);
 }
-
+console.log = function(e){ document.write(e+'<br/>') }
 console.log(startGame())
